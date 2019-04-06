@@ -4,19 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bluebird": "^3.5.26",
+    "@types/lodash": "^4.14.123",
     "ts-loader": "^5.3.3",
     "typescript": "^3.4.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0",
-    "webpack-dev-server": "^3.2.1"
+    "webpack-dev-server": "^3.2.1",
+    "worker-loader": "^2.0.0"
   },
   "dependencies": {
     "async-task": "^0.4.2",
+    "bluebird": "^3.5.4",
+    "lodash": "^4.17.11",
     "threads": "^0.12.1"
   }
 }
