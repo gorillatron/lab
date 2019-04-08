@@ -54,7 +54,7 @@ onmessage = ( evt ) => {
       pixels: imageData.data.buffer
     }, null)
 
-    setTimeout(() => draw(), 11)
+    setTimeout(() => draw(), 33)
   }
 
   draw()
