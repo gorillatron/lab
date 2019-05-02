@@ -5,7 +5,8 @@ type TState = {
 }
 
 type TAction = 
-  { type:string, payload?:Object }
+    { type: 'INC' }
+  | { type: 'DEC' }
 
 
 const initialState:TState = {
