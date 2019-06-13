@@ -1,0 +1,24 @@
+{
+  "name": "06_kafka_streams",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-consumer": "ts-node consumer.ts",
+    "start-transformer": "ts-node transformer.ts",
+    "start-producer": "ts-node producer.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/mongoose": "^5.5.1",
+    "kafka-streams": "^4.9.0",
+    "mongoose": "^5.5.10",
+    "node-rdkafka": "^2.6.1"
+  },
+  "devDependencies": {
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  }
+}

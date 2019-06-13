@@ -1,0 +1,2 @@
+FROM kafka
+EXPOSE 9092
