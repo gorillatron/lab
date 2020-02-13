@@ -1,14 +1,24 @@
 
 import { Injectable } from '@nestjs/common';
-import { Bong } from './bong.model';
-import { Token } from 'dist/bong/bong.model';
+import { EventStore } from '../core/event-store/event-store';
+import { Bong, Token, CreateBongDto } from './bong.model';
 
-let bongs = [new Bong('1337', [{ id: '1' }, { id: '2' }])];
+let bongs = [];
 
 @Injectable()
 export class BongRepository {
-  async findOneById(id: string): Promise<Bong> {
-    return bongs[0];
+
+  constructor(
+    private readonly eventStore: EventStore
+  ) {}
+
+  async create(bongDto: CreateBongDto) {
+    const bong = Bong.create(bongDto);
+    return bong
+  }
+
+  async findOneById(id: string) {
+    return bongs.find(bong => bong.id === id)
   }
 
   async findAll(): Promise<Bong[]> {
@@ -16,7 +26,7 @@ export class BongRepository {
   }
 
   async update(id:string, update: {tokens: Token[]}): Promise<Bong> {
-    const bong = bongs.find(bong => bong.id)
+    const bong = await this.findOneById(id);
     bong.tokens = update.tokens;
     return bong
   }

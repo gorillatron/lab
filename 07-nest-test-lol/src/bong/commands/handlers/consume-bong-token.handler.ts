@@ -12,7 +12,7 @@ export class ConsumeBongTokenHandler implements ICommandHandler<ConsumeBongToken
   async execute(command: ConsumeBongTokenCommand) {
     const { bongId, tokenId } = command;
     const bong = this.publisher.mergeObjectContext(
-      await this.repository.findOneById(+bongId),
+      await this.repository.findOneById(bongId),
     );
     
     bong.consumeToken(tokenId);
