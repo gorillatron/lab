@@ -52,7 +52,7 @@ export const fetchUser = () => {
 export const fetchBio = (userId: number) => {
   return wrapPromise<string>(new Promise((resolve) => {
     setTimeout(() => {
-      resolve("user is amazing")
+      resolve(`user ${userId} is amazing`)
     }, Math.random() * 3000)
   }))
 }
