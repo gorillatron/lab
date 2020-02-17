@@ -1,4 +1,6 @@
 
+import { take, put, delay } from 'redux-saga/effects'
+
 export type Ping = 'ping'
 export type Pong = 'pong'
 
@@ -6,9 +8,17 @@ export type PingActionType = {
   type: Ping
 }
 
+export const ping = (): PingActionType => ({
+  type: 'ping'
+})
+
 export type PongActionType = {
   type: Pong
 }
+
+export const pong = (): PongActionType => ({
+  type: 'pong'
+})
 
 export type ActionType = 
     PingActionType
@@ -39,14 +49,13 @@ export const reducer = (state: State, action: ActionType): State => {
       return {
         events: [...state.events, 'pong']
       }
+      
   }
-  return state
 }
 
-export const ping = (): PingActionType => ({
-  type: 'ping'
-})
-
-export const pong = (): PongActionType => ({
-  type: 'pong'
-})
+export const saga = function* saga() {
+  while(yield take('ping')) {
+    yield delay(2000)
+    yield put(pong())
+  }
+}

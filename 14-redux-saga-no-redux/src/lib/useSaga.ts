@@ -5,7 +5,7 @@ import { spawn } from 'redux-saga/effects'
 
 export type SagaStore<S, A> = [S, Dispatch<A>]
 
-export const useSaga = <S, A> (
+export default <S, A> (
   reducer: (state: S, action: A) => S,
   initialState: S,
   rootSaga: Saga
