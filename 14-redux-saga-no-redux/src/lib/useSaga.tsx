@@ -1,20 +1,21 @@
 import React, { useContext } from 'react'
 import { EventEmitter } from 'events'
 import { Dispatch, useReducer, useRef, useEffect, createContext } from 'react'
-import { runSaga, stdChannel, Saga, RunSagaOptions } from 'redux-saga'
+import { runSaga, stdChannel, Saga, RunSagaOptions, SagaIterator } from 'redux-saga'
+import { StrictEffect } from 'redux-saga/effects'
 
 export type SagaStore<S, A> = [S, Dispatch<A>]
 
 export const createSagaContext = <S, A> (
   reducer: (state: S, action: A) => S,
   initialState: S,
-  saga: Saga,
+  saga: () => Iterator<StrictEffect, any>,
   options?: Omit<RunSagaOptions<A, S>, 'channel' | 'dispatch' | 'getState'>
 ) => {
 
   const context = createContext<SagaStore<S, A> | null>(null)
 
-  const Provider: React.FC = ({ children, ...props}) => {
+  const Provider: React.FC = ({ children }) => {
 
     const [state, dispatch] = useSaga(reducer, initialState, saga, options)
 
@@ -32,14 +33,15 @@ export const createSagaContext = <S, A> (
 
   return {
     Provider,
-    useContextSaga
+    useContextSaga,
+    saga
   }
 }
 
 export const useSaga = <S, A> (
   reducer: (state: S, action: A) => S,
   initialState: S,
-  saga: Saga,
+  saga: () => Iterator<StrictEffect, any>,
   options?: Omit<RunSagaOptions<A, S>, 'channel' | 'dispatch' | 'getState'>
 ): SagaStore<S, A> => {
 

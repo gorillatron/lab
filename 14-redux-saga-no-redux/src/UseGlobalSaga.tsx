@@ -1,12 +1,12 @@
 import React from 'react'
-import { reducer, saga, ping, State, ActionType } from './store'
+import { reducer, saga, ping, State } from './store'
 import { createSagaContext } from './lib/useSaga'
 
 const initialState: State = {
   events: []
 }
 
-const sagaContext = createSagaContext<State, ActionType>(reducer, initialState, saga)
+const sagaContext = createSagaContext(reducer, initialState, saga)
 
 export default () => {
   return (
