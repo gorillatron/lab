@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events'
-import { Dispatch, useReducer, useRef, useState } from 'react'
+import { Dispatch, useReducer, useRef } from 'react'
 import { runSaga, stdChannel, Saga } from 'redux-saga'
 import { spawn } from 'redux-saga/effects'
 
@@ -15,10 +15,15 @@ export default <S, A> (
   const emitter = useRef(new EventEmitter())
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  const stateRef = useRef<S>()
+  stateRef.current = state
+
   if(!initialized.current) {
 
     const channel = stdChannel<A>()
-    emitter.current.on('action', (action: A) => channel.put(action))
+
+    emitter.current.on('action', 
+      (action: A) => channel.put(action))
 
     const io = {
       channel,
@@ -26,7 +31,7 @@ export default <S, A> (
         dispatch(action)
       },
       getState() {
-        return state
+        return stateRef.current
       }
     }
 
