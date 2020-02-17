@@ -46,10 +46,15 @@ export const reducer = (state: State, action: ActionType): State => {
       }
 
     case 'pong':
+      const isWaitingForPing = state.events[state.events.length - 1] === 'pong'
+
+      if(isWaitingForPing)
+        return state
+        
       return {
         events: [...state.events, 'pong']
       }
-      
+
   }
 }
 
