@@ -1,7 +1,10 @@
 
 import React, {
   Suspense,
-  SuspenseList
+  SuspenseList,
+  useState,
+  useTransition,
+  useEffect,
 } from "react"
 
 import { User, Resource, fetchUser, fetchBio } from "./api"
@@ -17,9 +20,16 @@ export default  () => {
 }
 
 export const UserProfile = (props: {resource: Resource<User>}) => {
-  
+
   const user = props.resource.read()
-  const bioResource = fetchBio(user.id)
+  const [bioResource, setBioResource] = useState<Resource<string>>()
+  const [startTransition] = useTransition({timeoutMs: 500})
+  
+  useEffect(() => {
+    startTransition(() => {
+      setBioResource(fetchBio(user.id))
+    })
+  })
 
   return (
     <>
