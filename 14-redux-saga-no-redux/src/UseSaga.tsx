@@ -1,6 +1,6 @@
 import React from 'react'
 import { reducer, saga, ping, State } from './store'
-import useSaga from './lib/useSaga'
+import { useSaga } from './lib/useSaga'
 
 const initialState: State = {
   events: []

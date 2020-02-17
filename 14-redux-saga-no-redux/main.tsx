@@ -4,9 +4,19 @@
 import React, {
 } from "react"
 import ReactDOM from "react-dom"
-import App from "./src/App"
+import UseSaga from "./src/UseSaga"
+import UseGlobalSaga from "./src/UseGlobalSaga"
 
 
 const rootElement = document.getElementById("root")
 
-ReactDOM.createRoot(rootElement).render(<App />)
+ReactDOM.createRoot(rootElement).render(
+  <div>
+    <div>
+      <UseSaga />
+    </div>
+    <div>
+      <UseGlobalSaga />
+    </div>
+  </div>
+)
