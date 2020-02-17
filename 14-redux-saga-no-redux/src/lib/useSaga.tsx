@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { EventEmitter } from 'events'
 import { Dispatch, useReducer, useRef, useEffect, createContext } from 'react'
-import { runSaga, stdChannel, Saga, RunSagaOptions, SagaIterator } from 'redux-saga'
+import { runSaga, stdChannel, RunSagaOptions } from 'redux-saga'
 import { StrictEffect } from 'redux-saga/effects'
 
 export type SagaStore<S, A> = [S, Dispatch<A>]
