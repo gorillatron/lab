@@ -61,10 +61,7 @@ export const reducer = (state: State, action: ActionType): State => {
 
 export const saga = function* saga() {
   while(yield take('ping')) {
-    console.log(yield select((s) => s.events))
     yield delay(2000)
-    console.log(yield select((s) => s.events))
     yield put(pong())
-    console.log(yield select((s) => s.events))
   }
 }
