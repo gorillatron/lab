@@ -15,10 +15,8 @@ const takePings = (until: number) => function* () {
     const nrOfPings = events.filter(e => e === 'ping').length    
 
     if(nrOfPings === until) 
-      break
+      return "counting done"
   }
-
-  return "counting done"
 }
 
 export default () => {
