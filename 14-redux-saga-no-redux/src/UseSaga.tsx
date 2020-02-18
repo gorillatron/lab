@@ -9,9 +9,12 @@ const initialState: State = {
 
 const pingLogger = function* () {
   while(yield take('ping')) {
+
     const events = (yield select((s) => s.events)) as ActionEvent[]
-    const nrOfPings = (events as string[]).filter(e => e === 'ping').length    
+    const nrOfPings = events.filter(e => e === 'ping').length    
+
     console.log('pinged', nrOfPings, 'times')
+    
     if(nrOfPings === 3) 
       break
   }
