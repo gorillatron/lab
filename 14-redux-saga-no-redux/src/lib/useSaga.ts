@@ -3,7 +3,6 @@ import { EventEmitter } from 'events'
 import { unstable_ImmediatePriority, unstable_scheduleCallback } from 'scheduler'
 import { Dispatch, useReducer, useRef, useEffect } from 'react'
 import { runSaga, stdChannel, RunSagaOptions, Saga } from 'redux-saga'
-import { StrictEffect } from 'redux-saga/effects'
 
 export type RunSaga = (saga: () => Generator) => Promise<void>
 
@@ -37,7 +36,7 @@ export const useSaga = <S, A> (
   saga: Saga,
   options?: Omit<RunSagaOptions<A, S>, 'channel' | 'dispatch' | 'getState'>
 ): SagaStore<S, A> => {
-
+  
   const emitter = useRef(new EventEmitter())
   const [reactState, reactDispatch] = useReducer(reducer, initialState)
 

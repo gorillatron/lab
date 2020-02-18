@@ -10,9 +10,19 @@ const sagaContext = createSagaContext(reducer, initialState, saga)
 
 export default () => {
   return (
-    <sagaContext.Provider>
-      <Inner />
-    </sagaContext.Provider>
+    <div>
+      <sagaContext.Provider>
+
+        <p>
+          These share state
+        </p>
+
+        <Inner />
+        <Inner />
+        <Inner />
+        
+      </sagaContext.Provider>
+    </div>
   )
 }
 

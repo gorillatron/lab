@@ -9,9 +9,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/events": "^3.0.0",
-    "@types/scheduler": "^0.16.1",
     "events": "^3.1.0",
+    "hash-sum": "^2.0.0",
     "react": "0.0.0-experimental-241c4467e",
     "react-dom": "0.0.0-experimental-241c4467e",
     "redux-saga": "^1.1.3",
@@ -19,7 +18,10 @@
     "typescript": "^3.7.5"
   },
   "devDependencies": {
+    "@types/hash-sum": "^1.0.0",
     "@types/react": "^16.9.19",
-    "@types/react-dom": "^16.9.5"
+    "@types/react-dom": "^16.9.5",
+    "@types/events": "^3.0.0",
+    "@types/scheduler": "^0.16.1"
   }
 }
