@@ -1,4 +1,5 @@
 import React from 'react'
+import { useAsync } from 'react-use'
 import { reducer, saga, ping, State } from './store'
 import { createSagaContext } from './lib'
 
@@ -10,19 +11,13 @@ const sagaContext = createSagaContext(reducer, initialState, saga)
 
 export default () => {
   return (
-    <div>
-      <sagaContext.Provider>
+    <sagaContext.Provider>
 
-        <p>
-          These share state
-        </p>
+      <Inner />
+      <Inner />
+      <Inner />
 
-        <Inner />
-        <Inner />
-        <Inner />
-        
-      </sagaContext.Provider>
-    </div>
+    </sagaContext.Provider>
   )
 }
 

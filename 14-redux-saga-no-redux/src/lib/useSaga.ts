@@ -4,7 +4,7 @@ import { unstable_ImmediatePriority, unstable_scheduleCallback } from 'scheduler
 import { Dispatch, useReducer, useRef, useEffect } from 'react'
 import { runSaga, stdChannel, RunSagaOptions, Saga } from 'redux-saga'
 
-export type RunSaga = (saga: () => Generator) => Promise<void>
+export type RunSaga = <RT = any> (saga: () => Generator<any, RT>) => Promise<RT>
 
 export type SagaStore<S, A> = [S, Dispatch<A>, RunSaga]
 
@@ -76,9 +76,10 @@ export const useSaga = <S, A> (
     return action
   }
 
-  const run: RunSaga = async (saga): Promise<void> => {
+  const run: RunSaga = async (saga) => {
     const task = runSaga(getIO(), saga)
-    await task.toPromise()
+    const result = await task.toPromise()
+    return result
   }
 
   return [reactState, enhancedDispatch, run]

@@ -12,11 +12,20 @@ const rootElement = document.getElementById("root")
 
 ReactDOM.createRoot(rootElement).render(
   <div>
-    <div>
+
+    <div style={{marginBottom: 30}}>
+      <UseSaga />
       <UseSaga />
     </div>
-    <div>
+
+    <div style={{marginBottom: 30}}>
+
+        <p>
+          These share state
+        </p>
+
       <UseGlobalSaga />
+      
     </div>
   </div>
 )

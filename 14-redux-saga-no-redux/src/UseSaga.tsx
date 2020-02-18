@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useAsync } from 'react-use'
 import { reducer, saga, ping, State, ActionEvent } from './store'
 import { useSaga } from './lib'
 import { take, select } from 'redux-saga/effects'
@@ -7,17 +8,17 @@ const initialState: State = {
   events: []
 }
 
-const pingLogger = function* () {
+const countThreePings = function* () {
   while(yield take('ping')) {
 
     const events = (yield select((s) => s.events)) as ActionEvent[]
     const nrOfPings = events.filter(e => e === 'ping').length    
 
-    console.log('pinged', nrOfPings, 'times')
-    
     if(nrOfPings === 3) 
       break
   }
+
+  return "counting done"
 }
 
 export default () => {
@@ -28,10 +29,9 @@ export default () => {
     saga
   )
 
-  useEffect(() => {
-    run(pingLogger)
-      .then(_ => console.log('logging done'))
-  }, [])
+  const counted = useAsync(async () => {
+    return await run(countThreePings)
+  })
 
   return (
     <>
@@ -52,6 +52,18 @@ export default () => {
         state.status &&
           <b style={{color: 'orange'}}>{ state.status }</b>
       }
+
+      
+      <div style={{marginTop: 10}}>
+        {
+          counted.loading ?
+            <b style={{color: 'orange'}}>counting..</b> :
+          counted.value ?
+            <b style={{color: 'green'}}>{ counted.value }</b> :
+          "" 
+        }
+      </div>
+
 
     </>
   )
