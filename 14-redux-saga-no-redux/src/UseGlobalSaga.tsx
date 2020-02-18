@@ -1,6 +1,6 @@
 import React from 'react'
 import { reducer, saga, ping, State } from './store'
-import { createSagaContext } from './lib/useSaga'
+import { createSagaContext } from './lib'
 
 const initialState: State = {
   events: []
@@ -18,7 +18,7 @@ export default () => {
 
 export const Inner = () => {
 
-  const [state, dispatch] = sagaContext.useContextSaga()
+  const [state, dispatch] = sagaContext.use()
 
   return (
     <>

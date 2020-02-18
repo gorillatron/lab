@@ -1,5 +1,5 @@
 
-import { take, put, delay, select } from 'redux-saga/effects'
+import { take, put, delay, select, SelectEffect } from 'redux-saga/effects'
 
 export type Ping = 'ping'
 export type Pong = 'pong'
@@ -61,7 +61,11 @@ export const reducer = (state: State, action: ActionType): State => {
 
 export const saga = function* saga() {
   while(yield take('ping')) {
-    yield delay(2000)
+    yield delay(800)
     yield put(pong())
   }
+}
+
+export const selectState = <T> (selector: (s:State) => T): SelectEffect => {
+  return select(selector)
 }

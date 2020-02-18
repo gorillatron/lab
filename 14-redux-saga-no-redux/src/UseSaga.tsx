@@ -1,18 +1,34 @@
-import React from 'react'
-import { reducer, saga, ping, State } from './store'
-import { useSaga } from './lib/useSaga'
+import React, { useEffect } from 'react'
+import { reducer, saga, ping, State, ActionEvent } from './store'
+import { useSaga } from './lib'
+import { take, select } from 'redux-saga/effects'
 
 const initialState: State = {
   events: []
 }
 
+const pingLogger = function* () {
+  while(yield take('ping')) {
+    const events = (yield select((s) => s.events)) as ActionEvent[]
+    const nrOfPings = (events as string[]).filter(e => e === 'ping').length    
+    console.log('pinged', nrOfPings, 'times')
+    if(nrOfPings === 3) 
+      break
+  }
+}
+
 export default () => {
 
-  const [state, dispatch] = useSaga(
+  const [state, dispatch, run] = useSaga(
     reducer, 
     initialState, 
     saga
   )
+
+  useEffect(() => {
+    run(pingLogger)
+      .then(_ => console.log('logging done'))
+  }, [])
 
   return (
     <>
