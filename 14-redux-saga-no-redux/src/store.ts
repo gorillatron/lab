@@ -30,7 +30,7 @@ export type ActionEvent =
 
 export type State = {
   events: ActionEvent[]
-  status?: string
+  error?: string
 }
 
 export const reducer = (state: State, action: ActionType): State => {
@@ -40,7 +40,7 @@ export const reducer = (state: State, action: ActionType): State => {
       const isWaitingForPong = state.events[state.events.length - 1] === 'ping'
 
       if(isWaitingForPong)
-        return { ...state, status: 'Invariant: trying to ping while ponging!'}
+        return { ...state, error: 'Invariant: trying to ping while ponging!'}
 
       return {
         events: [...state.events, 'ping']
@@ -50,7 +50,7 @@ export const reducer = (state: State, action: ActionType): State => {
       const isWaitingForPing = state.events[state.events.length - 1] === 'pong'
 
       if(isWaitingForPing)
-        return { ...state, status: 'Invariant: trying to pong while pinging!'}
+        return { ...state, error: 'Invariant: trying to pong while pinging!'}
 
       return {
         events: [...state.events, 'pong']

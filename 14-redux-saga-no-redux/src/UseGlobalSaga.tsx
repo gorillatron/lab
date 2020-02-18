@@ -41,8 +41,8 @@ export const Inner = () => {
       </div>
 
       {
-        state.status &&
-          <b style={{color: 'orange'}}>{ state.status }</b>
+        state.error &&
+          <b style={{color: 'orange'}}>{ state.error }</b>
       }
 
     </>

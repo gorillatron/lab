@@ -8,13 +8,13 @@ const initialState: State = {
   events: []
 }
 
-const countThreePings = function* () {
+const takePings = (until: number) => function* () {
   while(yield take('ping')) {
 
     const events = (yield select((s) => s.events)) as ActionEvent[]
     const nrOfPings = events.filter(e => e === 'ping').length    
 
-    if(nrOfPings === 3) 
+    if(nrOfPings === until) 
       break
   }
 
@@ -30,7 +30,7 @@ export default () => {
   )
 
   const counted = useAsync(async () => {
-    return await run(countThreePings)
+    return await run(takePings(3))
   })
 
   return (
@@ -49,8 +49,8 @@ export default () => {
       </div>
 
       {
-        state.status &&
-          <b style={{color: 'orange'}}>{ state.status }</b>
+        state.error &&
+          <b style={{color: 'orange'}}>{ state.error }</b>
       }
 
       
