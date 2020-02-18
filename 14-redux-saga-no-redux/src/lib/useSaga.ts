@@ -4,7 +4,7 @@ import { unstable_ImmediatePriority, unstable_scheduleCallback } from 'scheduler
 import { Dispatch, useReducer, useRef, useEffect } from 'react'
 import { runSaga, stdChannel, RunSagaOptions, Saga } from 'redux-saga'
 
-export type RunSaga = <RT = any> (saga: () => Generator<any, RT>) => Promise<RT>
+export type RunSaga = <RT> (saga: () => Generator<any, RT>) => Promise<RT>
 
 export type SagaStore<S, A> = [S, Dispatch<A>, RunSaga]
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useAsync } from 'react-use'
 import { reducer, saga, ping, State } from './store'
 import { createSagaContext } from './lib'
 
