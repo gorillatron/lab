@@ -14,7 +14,7 @@
   "dependencies": {
     "@types/mongoose": "^5.5.1",
     "kafka-streams": "^4.9.0",
-    "mongoose": "^5.5.10",
+    "mongoose": "^5.7.5",
     "node-rdkafka": "^2.6.1"
   },
   "devDependencies": {
